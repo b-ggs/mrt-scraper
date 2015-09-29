@@ -1,4 +1,4 @@
-# Swarm MRT Scraper
+# MRT Scraper
 This was made to collect images from the DOTC MRT Line 3 live feed.
 
 # Dependencies
