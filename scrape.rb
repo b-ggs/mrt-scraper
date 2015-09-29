@@ -7,7 +7,7 @@ require 'capybara/dsl'
 require 'capybara/poltergeist'
 require 'base64'
 require 'fileutils'
-require 'pry-byebug'
+# require 'pry-byebug'
 
 URL_BASE = 'http://dotcmrt3.gov.ph/cctv.php?stationId='
 IMAGE_PREFIX = "data:image/jpeg;base64,"
@@ -48,47 +48,58 @@ end
 Capybara.default_driver = :poltergeist
 Capybara.run_server = false
 
-module GetImage
+module Scraper
   class WebScraper
     include Capybara::DSL
 
     def get_images(url)
-      puts "Visiting #{url}."
       visit(url)
-      puts "Waiting for #{VISIT_WAIT} seconds."
       sleep(VISIT_WAIT)
-      puts "Parsing."
       doc = Nokogiri::HTML(page.html)
       panels = {}
       for panel_index in MIN_CAMERA_PANELS..MAX_CAMERA_PANELS
         id = "#{ID_BASE}#{panel_index}"
-        puts "Getting id #{id}."
         path = "//*[@id=\"#{id}\"]/@src"
         panels[id] = doc.xpath(path).to_s
-        puts "Retrieved id #{id}."
       end
       panels
     end
   end
+
+  class ActionLogger
+    def log(str)
+      stamp = DateTime.now
+      File.open('log', 'a') { |f|
+        f.puts "#{stamp} - #{str}"
+      }
+    end
+  end
 end
 
-station_id = 13
-station_dir = "#{station_id} - #{STATION_NAMES[station_id]}"
-url = 'http://dotcmrt3.gov.ph/cctv.php?stationId=13'
-scraper = GetImage::WebScraper.new
-panels = scraper.get_images(url)
-filename = DateTime.now.to_s.gsub('+', '-').gsub(':', '-') + '.jpg'
+logger = Scraper::ActionLogger.new
+filename = DateTime.now.to_s.gsub('+', '-').gsub(':', '-').gsub('T', ' ') + '.jpg'
+logger.log "Starting scrape session." 
 
-panels.map{ |key, image|
-  directory = "#{station_dir} #{STATION_BASE}/#{key}"
-  save = "#{directory}/#{filename}"
-  if image != "assets/img/default.gif"
-    FileUtils::mkdir_p "#{directory}"
-    File.open(save, 'wb') do|f|
-      f.write(Base64.decode64(image[IMAGE_PREFIX.length .. -1]))
-      puts "Saved #{key} as #{save}."
+for station_index in MIN_STATION_INDEX..MAX_STATION_INDEX
+  logger.log "Starting scrape on #{STATION_NAMES[station_index]}."
+  station_dir = "#{station_index} - #{STATION_NAMES[station_index]}"
+  url = "http://dotcmrt3.gov.ph/cctv.php?stationId=#{station_index}"
+  scraper = Scraper::WebScraper.new
+  panels = scraper.get_images(url)
+
+  panels.map { |key, image|
+    directory = "#{station_dir} #{STATION_BASE}/#{key}"
+    save = "#{directory}/#{filename}"
+    if image != "assets/img/default.gif"
+      FileUtils::mkdir_p "#{directory}"
+      File.open(save, 'wb') do|f|
+        f.write(Base64.decode64(image[IMAGE_PREFIX.length .. -1]))
+        logger.log "Saved #{key} as #{save}."
+      end
+    else
+      logger.log "Scrape failed on #{key}."
     end
-  else
-    puts "Scrape failed on #{key}."
-  end
-}
+  }
+end
+
+logger.log "Ending scrape session." 
