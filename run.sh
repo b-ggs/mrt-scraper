@@ -1,6 +1,5 @@
 #!/bin/sh
 while true
 do
-  echo "Scraping."
-  ruby scrape.rb
+  ruby main.rb
 done
