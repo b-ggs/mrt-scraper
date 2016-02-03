@@ -1,5 +1,5 @@
 #!/bin/sh
 while true
 do
-  ruby main.rb
+  ruby mrt-scraper.rb -s santolan-anapolis
 done

@@ -1,0 +1,11 @@
+name: mrt-scraper
+
+windows:
+  - santolan-anapolis:
+      name: dev
+      panes:
+        - ruby mrt-scraper.rb -s santolan-anapolis
+  - shaw-boulevard:
+      name: server
+      panes: 
+        - ruby mrt-scraper.rb -s shaw-boulevard

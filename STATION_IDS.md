@@ -1,0 +1,12 @@
+north-avenue
+quezon-avenue
+gma-kamuning
+cubao
+santolan-anapolis
+ortigas
+shaw-boulevard
+boni-avenue
+guadalupe
+buendia
+ayala-avenue
+taft-avenue

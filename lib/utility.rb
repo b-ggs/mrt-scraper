@@ -9,16 +9,16 @@ module Utility
   end
   class Comparator
     def check_if_within_scrape_time
-      SCRAPE_TIMES.each { |scrape_time|
+      response = false
+      within_scrape = SCRAPE_TIMES.each { |scrape_time|
         from = scrape_time[0]
         to = scrape_time[1]
         hour = Time.now.hour
         if from <= hour && hour < to
-          true
-        else
-          false
+          response = true
         end
-      }.first
+      }
+      response
     end
   end
 end
