@@ -28,7 +28,7 @@ unless options.empty?
       panels = scraper.get_images(url)
 
       panels.each.with_index { |uri, panel_index|
-        directory = "#{station_id}/#{panel_index}/#{timestamp.hour}"
+        directory = "out/#{station_id}/#{panel_index}/#{timestamp.hour}"
         save = "#{directory}/#{filename}"
         if uri != DEFAULT_URI
           FileUtils::mkdir_p("#{directory}")
