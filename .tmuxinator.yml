@@ -1,6 +1,10 @@
 name: mrt-scraper
 
 windows:
+  - logs:
+      name: dev
+      panes:
+        - mv log log-old && echo "" > log && tail -f log
   - santolan-anapolis:
       name: dev
       panes:
