@@ -4,21 +4,27 @@ This was made to collect images from the DOTC MRT Line 3 live feed.
 ## Dependencies
 Install the required gems.
 
-    $ gem install capybara phantomjs poltergeist
+```
+$ bundle install
+```
 
-Specifically for headless instances.
+Make sure `libfontconfig` or your distro's equivalent is installed.
 
-    # apt-get install libfontconfig
-
+```
+# apt-get install libfontconfig
+```
+dfasdfk
 ## Usage
-If you want to have this running in the background, I recommend you use screen or tmux.
 
-    $ screen -S scraper
+Follow the format as specified below:
+```
+Usage: ruby mrt-scraper.rb [options]
+  -s, --station-id STATION_ID      STATION_ID as indicated in `STATION_IDS.md`.
+  -l, --list-stations              List all possible STATION_IDs.
+  -h, --help                       Show this help message.
+```
 
-Run the never-ending shell script.
-
-    $ ./run.sh
-
-Check if everything's running correctly by looking at the logs.
-
-    $ cat log
+For example:
+```
+$ ruby mrt-scraper.rb -s santolan-anapolis
+```
