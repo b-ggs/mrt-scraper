@@ -13,7 +13,7 @@ Make sure `libfontconfig` or your distro's equivalent is installed.
 ```
 # apt-get install libfontconfig
 ```
-dfasdfk
+
 ## Usage
 
 ### Single usage
