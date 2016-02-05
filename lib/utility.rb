@@ -1,10 +1,31 @@
 module Utility
   class Logger 
+    def initialize(id, directory = "")
+      @id = id
+      @directory = directory
+    end
+
     def log(str)
-      stamp = DateTime.now
-      File.open('log', 'a') { |f|
+      stamp = DateTime.now.to_s.gsub('+', ' ').gsub(':', '-').gsub('T', ' ')
+      File.open("#{@directory}log", 'a') { |f|
         f.puts("#{stamp} - #{str}")
       }
+    end
+
+    def log_start
+      log("Attempting scrape on #{@id}.")
+    end
+
+    def log_end
+      log("Ending scrape on #{@id}.")
+    end
+
+    def log_failed(error)
+      log("FAIL: Scrape failed on #{@id}. (#{error})")
+    end
+
+    def log_success(path)
+      log("SUCCESS: Scraped #{path}.")
     end
   end
   class Comparator

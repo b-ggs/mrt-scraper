@@ -4,6 +4,6 @@ PATH = '//div[@class=\'cctv-thumbnail\']/img/@src'
 DEFAULT_URI = '/assets/svg/cctv-not-accessible.svg'
 VISIT_WAIT = 5
 SCRAPE_TIMES = [
-  [5, 22],
+  [0, 22],
 ]
 SCRAPE_INTERVAL = 120

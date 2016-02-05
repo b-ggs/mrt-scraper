@@ -8,6 +8,10 @@ class OptionParser
         args[:station_id] = v 
         is_valid = true
       }
+      parser.on("-d", "--directory DIRECTORY", "Directory to save the images in.") { |v| 
+        args[:directory] = v 
+        is_valid = true
+      }
       parser.on("-l", "--list-stations", "List all possible STATION_IDs.") {
         puts File.read('STATION_IDS.md')
         is_valid = true
