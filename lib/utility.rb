@@ -7,7 +7,7 @@ module Utility
 
     def log(str)
       stamp = DateTime.now.to_s.gsub('+', ' ').gsub(':', '-').gsub('T', ' ')
-      File.open("#{@directory}log", 'a') { |f|
+      File.open("#{@directory}log-#{@id}", 'a') { |f|
         f.puts("#{stamp} - #{str}")
       }
     end
