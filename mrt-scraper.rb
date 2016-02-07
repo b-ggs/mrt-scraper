@@ -28,7 +28,7 @@ unless options.empty?
       logger.log_failed("PANELS_EMPTY")
     else
       panels.each.with_index { |uri, panel_index|
-        directory = "#{working_directory}out/#{station_id}/#{panel_index}/#{timestamp.hour}"
+        directory = "#{working_directory}out/#{station_id}/#{panel_index}/#{timestamp.year}/#{timestamp.month}/#{timestamp.day}/#{timestamp.hour}"
         save = "#{directory}/#{filename}"
         if uri != DEFAULT_URI
           FileUtils::mkdir_p("#{directory}")
