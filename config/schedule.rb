@@ -1,4 +1,4 @@
-RUBY_EXECUTABLE = "/usr/bin/ruby"
+RUBY_EXECUTABLE = ENV['RUBY_EXECUTABLE']
 PROJECT_DIRECTORY = "~/dev/mrt-scraper"
 STORAGE_DIRECTORY = "~/dev/mrt-scraper/foobar"
 STATION_IDS = [
