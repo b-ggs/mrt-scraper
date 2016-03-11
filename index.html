@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>MRT Scraper by b-ggs</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>MRT Scraper</h1>
+        <p>Collect images from the DOTC MRT Line 3 live feed.</p>
+
+        <p class="view"><a href="https://github.com/b-ggs/mrt-scraper">View the Project on GitHub <small>b-ggs/mrt-scraper</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/b-ggs/mrt-scraper/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/b-ggs/mrt-scraper/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/b-ggs/mrt-scraper">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="mrt-scraper" class="anchor" href="#mrt-scraper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MRT Scraper</h1>
+
+<p>This was made to collect images from the DOTC MRT Line 3 live feed.</p>
+
+<h2>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<p>Install the required gems.</p>
+
+<pre><code>$ bundle install
+</code></pre>
+
+<p>Make sure <code>libfontconfig</code> or your distro's equivalent is installed.</p>
+
+<pre><code># apt-get install libfontconfig
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="single-usage" class="anchor" href="#single-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Single usage</h3>
+
+<p>Follow the format as specified below in order to grab a single frame of from the live feed.</p>
+
+<pre><code>Usage: ruby mrt-scraper.rb [options]
+    -s, --station-id STATION_ID      STATION_ID as indicated in `STATION_IDS.md`.
+    -d, --directory DIRECTORY        Directory to save the images in.
+    -l, --list-stations              List all possible STATION_IDs.
+    -h, --help                       Show this help message.
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>$ ruby mrt-scraper.rb -s santolan-anapolis -d ~/foo
+</code></pre>
+
+<h3>
+<a id="run-as-a-cron-job" class="anchor" href="#run-as-a-cron-job" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run as a cron job</h3>
+
+<p>Using the <a href="https://github.com/javan/whenever">whenever</a> gem:</p>
+
+<pre><code>$ whenever --update-crontab
+</code></pre>
+
+<p>You can edit the default scheduling and directories at <code>config/schedule.rb</code>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/b-ggs">b-ggs</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
